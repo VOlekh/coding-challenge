@@ -28,6 +28,7 @@ export const EventTypes: IKeyValuePair[] = [
 export function VFormComponent(props: VFormComponentProps) {
   const [durationValue, setDurationValue] = useState('');
   const [eventTypeValue, setEventTypeValue] = useState('');
+  const [checked, setChecked] = useState(false);
 
   const handleSelectDuration = (e: any) => {
     console.log(e.target.value);
@@ -38,6 +39,11 @@ export function VFormComponent(props: VFormComponentProps) {
     console.log(e.target.value);
     setEventTypeValue(e.target.value);
   };
+
+  const handleChange = () => {
+    setChecked(!checked);
+  };
+  console.log('checked', checked);
 
   const [form, setForm] = useState<VFormComponentProps>();
 
@@ -67,7 +73,7 @@ export function VFormComponent(props: VFormComponentProps) {
             {/* close button */}
             <button
               type="button"
-              className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-4 focus:ring-blue-300"
+              className="bg-white rounded-md border-2 rounded border-gray-500 p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-4 focus:ring-blue-300"
             >
               <span className="sr-only">Close</span>
               {/* <!-- Heroicon name: outline/x --> */}
@@ -176,8 +182,33 @@ export function VFormComponent(props: VFormComponentProps) {
                     type="checkbox"
                     id="scales"
                     name="scales"
-                    checked
+                    onChange={handleChange}
                   />
+
+                  <label>
+                    <input
+                      type="checkbox"
+                      className=" m-3 ml-10  focus:ring-4 focus:ring-blue-300 py-2  "
+                      onChange={handleChange}
+                    />
+                    <span></span>
+                  </label>
+
+                  <label className="flex justify-start items-start">
+                    <div className="bg-white border-2 rounded border-gray-500 w-6 h-6 flex flex-shrink-0 justify-center items-center mr-2 focus-within:border-blue-500 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-4 focus:ring-blue-300">
+                      <input
+                        type="checkbox"
+                        className="opacity-0 absolute"
+                        onChange={handleChange}
+                      />
+                      <svg
+                        className="fill-current hidden w-4 h-4 text-blue-500 pointer-events-none"
+                        viewBox="0 0 20 20"
+                      >
+                        <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />
+                      </svg>
+                    </div>
+                  </label>
 
                   <input
                     type="text"
