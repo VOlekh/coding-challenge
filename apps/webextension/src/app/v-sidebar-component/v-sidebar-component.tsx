@@ -1,4 +1,5 @@
-import './v-sidebar-component.module.css';
+import { CssSyntaxError } from 'postcss';
+import styles from './v-sidebar-component.module.css';
 
 /* eslint-disable-next-line */
 export interface VSidebarComponentProps {}
@@ -8,9 +9,9 @@ export function VSidebarComponent(props: VSidebarComponentProps) {
     <div>
       {/* <h1>Welcome to VSidebarComponent!</h1> */}
 
-      <div className="flex items-center min-h-screen bg-gray-50 dark:bg-gray-900">
+      <div className="flex items-center min-h-screen bg-white dark:bg-gray-900">
         <div className="container mx-auto">
-          <div className="max-w-md mx-auto my-10 bg-white p-5 rounded-md shadow-sm">
+          <div className="max-w-md mx-auto my-10 bg-gray-50 p-5 rounded-md shadow-sm">
             {/* close button */}
             <button
               type="button"
@@ -75,13 +76,24 @@ export function VSidebarComponent(props: VSidebarComponentProps) {
                       data-popper-reference-hidden=""
                       data-popper-escaped=""
                       data-popper-placement="right"
-                      // style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(1162px, 1620px, 0px);"
+                      style={{
+                        position: 'absolute',
+                        inset: '0px auto auto 0px',
+                        margin: 0,
+                        transform: 'translate3d(1162px, 1620px, 0px)',
+                      }}
                     >
                       Information about event types on right
                       <div
                         className="tooltip-arrow"
                         data-popper-arrow=""
-                        // style="position: absolute; top: 0px; transform: translate3d(0px, 28px, 0px);"
+                        //In JSX, JavaScript expressions are written inside curly braces, and since JavaScript objects also use curly braces, the styling in the example above is written inside two sets of curly braces {{}}.
+                        style={{
+                          backgroundColor: 'red',
+                          position: 'absolute',
+                          top: 0,
+                          transform: 'translate3d(0px, 28px, 0px)',
+                        }}
                       ></div>
                     </div>
                   </div>
@@ -102,8 +114,9 @@ export function VSidebarComponent(props: VSidebarComponentProps) {
                   </label>
 
                   {/* checkbox */}
+
                   <input
-                    className="m-6 focus:ring-4 focus:ring-blue-300 "
+                    className=" mb-0 ml-10  focus:ring-4 focus:ring-blue-300 py-2  "
                     type="checkbox"
                     id="scales"
                     name="scales"
@@ -119,10 +132,12 @@ export function VSidebarComponent(props: VSidebarComponentProps) {
                     className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"
                   />
                 </div>
+
                 <div className="mb-6">
                   <textarea
                     name="availibilities"
                     id="availibilities"
+                    rows={7}
                     placeholder="Start selecting availibilities you would like to share on the calendar"
                     className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"
                     required
