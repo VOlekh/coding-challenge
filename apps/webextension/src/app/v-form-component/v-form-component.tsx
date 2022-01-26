@@ -171,31 +171,13 @@ export function VFormComponent(props: VFormComponentProps) {
                 </div>
 
                 <div className="mb-6">
-                  <label className="text-sm text-gray-600 dark:text-gray-400">
-                    Save placeholders
-                  </label>
-
                   {/* checkbox */}
 
-                  <input
-                    className=" m-3 ml-10  focus:ring-4 focus:ring-blue-300 py-2  "
-                    type="checkbox"
-                    id="scales"
-                    name="scales"
-                    onChange={handleChange}
-                  />
-
-                  <label>
-                    <input
-                      type="checkbox"
-                      className=" m-3 ml-10  focus:ring-4 focus:ring-blue-300 py-2  "
-                      onChange={handleChange}
-                    />
-                    <span></span>
-                  </label>
-
                   <label className="flex justify-start items-start">
-                    <div className="bg-white border-2 rounded border-gray-500 w-6 h-6 flex flex-shrink-0 justify-center items-center mr-2 focus-within:border-blue-500 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-4 focus:ring-blue-300">
+                    <label className="text-sm text-gray-600 dark:text-gray-400">
+                      Save placeholders
+                    </label>
+                    <div className="bg-white ml-5 mb-2 border-2 rounded border-gray-500 w-6 h-6 flex flex-shrink-0 justify-center items-center mr-2 focus-within:border-blue-500 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-4 focus:ring-blue-300">
                       <input
                         type="checkbox"
                         className="opacity-0 absolute"
