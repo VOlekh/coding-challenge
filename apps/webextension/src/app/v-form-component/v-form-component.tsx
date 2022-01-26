@@ -71,28 +71,30 @@ export function VFormComponent(props: VFormComponentProps) {
         <div className="container mx-auto">
           <div className="max-w-md mx-auto bg-gray-50 p-5 ">
             {/* close button */}
-            <button
-              type="button"
-              className="bg-white rounded-md border-2 rounded border-gray-500 p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-4 focus:ring-blue-300"
-            >
-              <span className="sr-only">Close</span>
-              {/* <!-- Heroicon name: outline/x --> */}
-              <svg
-                className="h-6 w-6"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden="true"
+            <div className="flex justify-end">
+              <button
+                type="button"
+                className="bg-white rounded-md border-2 rounded border-gray-500 p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-4 focus:ring-blue-300"
               >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
+                <span className="sr-only">Close</span>
+                {/* <!-- Heroicon name: outline/x --> */}
+                <svg
+                  className="h-3 w-3"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
 
             <div className="m-7">
               <form id="form">
@@ -172,8 +174,13 @@ export function VFormComponent(props: VFormComponentProps) {
 
                 <div className="mb-6">
                   {/* checkbox */}
+                  <div className="">
+                    <label className="text-sm text-gray-600 dark:text-gray-400 ">
+                      Save placeholders
+                    </label>
+                  </div>
 
-                  <label className="flex justify-start items-start">
+                  <label className="flex justify-end items-start">
                     <label className="text-sm text-gray-600 dark:text-gray-400">
                       Save placeholders
                     </label>
