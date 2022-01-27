@@ -77,7 +77,7 @@ export function VFormComponent(props: VFormComponentProps) {
             <div className="flex justify-end">
               <button
                 type="button"
-                className="bg-white rounded-md border-2 rounded border-gray-500 p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-4 focus:ring-blue-300"
+                className="bg-white rounded-md border-2 rounded border-gray-500 p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 "
                 onClick={handleClose}
               >
                 <span className="sr-only">Close</span>
