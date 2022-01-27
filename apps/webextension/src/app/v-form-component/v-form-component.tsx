@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 
 /* eslint-disable-next-line */
 export interface VFormComponentProps {
-  duration?: string;
-  eventType?: string;
+  duration?: Array<string>;
+  eventType?: Array<string>;
   savePlaceholders?: boolean;
   placeholderName?: string;
   availabilities?: string;
@@ -13,16 +13,16 @@ interface IKeyValuePair {
   key: string;
   value: string;
 }
-export const Durations: IKeyValuePair[] = [
-  { key: '1', value: '45 min' },
-  { key: '2', value: '30 min' },
-  { key: '3', value: '20 min' },
+const duration = [
+  { key: '45', value: '45 min' },
+  { key: '30', value: '30 min' },
+  { key: '20', value: '20 min' },
 ];
 
-export const EventTypes: IKeyValuePair[] = [
-  { key: '1', value: 'Sare slots' },
-  { key: '2', value: 'Discard slots' },
-  { key: '3', value: 'Modify slots' },
+const eventType = [
+  { key: 'share', value: 'Share slots' },
+  { key: 'discard', value: 'Discard slots' },
+  { key: 'modify', value: 'Modify slots' },
 ];
 
 export function VFormComponent(props: VFormComponentProps) {
@@ -109,9 +109,14 @@ export function VFormComponent(props: VFormComponentProps) {
                     id="duration"
                     onChange={handleSelectDuration}
                   >
-                    <option value="30min">30 min</option>
+                    {/* drop-down options */}
+                    {duration.map((i) => {
+                      return <option value={i.key}>{i.value}</option>;
+                    })}
+
+                    {/* <option value="30min">30 min</option>
                     <option value="45min">45 min</option>
-                    <option value="60min">60 min</option>
+                    <option value="60min">60 min</option> */}
                   </select>
                   <p>Selected {durationValue} </p>
                 </div>
@@ -165,9 +170,14 @@ export function VFormComponent(props: VFormComponentProps) {
                     id="eventType"
                     onChange={handleSelectEventTypeValue}
                   >
-                    <option value="share">Share slots</option>
+                    {/* drop-down options */}
+                    {eventType.map((i) => {
+                      return <option value={i.key}>{i.value}</option>;
+                    })}
+
+                    {/* <option value="share">Share slots</option>
                     <option value="discard">Discard slots</option>
-                    <option value="duplicate">Duplicate slots</option>
+                    <option value="duplicate">Duplicate slots</option> */}
                   </select>
                   <p>Selected {eventTypeValue}</p>
                 </div>
