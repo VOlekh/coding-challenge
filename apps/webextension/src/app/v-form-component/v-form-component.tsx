@@ -131,7 +131,7 @@ export function VFormComponent(props: VFormComponentProps) {
                       Event types
                     </label>
 
-                    {/* Show tooltip on top */}
+                    {/* Show tooltip on top-right */}
                     <div className=" ">
                       <div className="relative ">
                         <div className="group cursor-pointer relative inline-block  text-center">

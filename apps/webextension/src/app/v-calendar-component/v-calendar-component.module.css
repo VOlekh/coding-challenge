@@ -1,0 +1,7 @@
+.e-dropdownbase .e-list-item.e-item-focus,
+.e-dropdownbase .e-list-item.e-active,
+.e-dropdownbase .e-list-item.e-active.e-hover,
+.e-dropdownbase .e-list-item.e-hover {
+  background-color: #1f9c99;
+  color: #2319b8;
+}
