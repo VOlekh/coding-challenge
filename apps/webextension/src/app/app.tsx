@@ -8,10 +8,11 @@ export function App() {
   return (
     <div className="flex justify-start items-start h-screen w-screen">
       {/* Replace the below div with your sidebar component from @coding-challenge/ui! */}
-      <VSidebarComponent />
-      <VCalendarComponent/>
+      <div className="flex justify-start items-start h-screen w-screen">
+        <VSidebarComponent />
+      </div>
 
-      
+      <VCalendarComponent />
     </div>
   );
 }

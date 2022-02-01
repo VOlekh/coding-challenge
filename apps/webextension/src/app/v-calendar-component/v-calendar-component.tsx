@@ -2,7 +2,7 @@ import './v-calendar-component.module.css';
 import React, { useState } from 'react';
 import { MultiSelect } from 'react-multi-select-component';
 import moment from 'moment';
-import DatePicker from 'react-multi-date-picker';
+import DatePicker, { DateObject } from 'react-multi-date-picker';
 import DatePanel from 'react-multi-date-picker/plugins/date_panel';
 
 /* eslint-disable-next-line */
@@ -20,9 +20,14 @@ export function VCalendarComponent(props: VCalendarComponentProps) {
   //duration will come from form component TBD
   const duration = 15;
   // const [availabilitiesValues, setAvailabilities] = useState(new Set());
-  const [selected, setSelected] = useState([]);
-  const selectedAvailabilities = JSON.stringify(selected);
-  const [value, setValue] = useState(new Date());
+  const [selectedIntervals, setSelectedIntervals] = useState([]);
+  const selectedAvailableIntervals = JSON.stringify(selectedIntervals);
+
+  const [selectedDates, setSelectedDates] = useState<
+    DateObject | DateObject[]
+  >();
+  const selectedAvailableDates = JSON.stringify(selectedDates);
+  const textToCopy = `Following dates ${selectedAvailableDates} and time slots ${selectedAvailableIntervals}`
 
   // const handleSelectAvailabilities = (
   //   e: React.ChangeEvent<HTMLSelectElement>
@@ -42,6 +47,7 @@ export function VCalendarComponent(props: VCalendarComponentProps) {
   function getTimeStops(start: any, end: any) {
     const startTime = moment(start, 'HH:mm');
     const endTime = moment(end, 'HH:mm');
+    const duration = 15;
 
     if (endTime.isBefore(startTime)) {
       endTime.add(1, 'day');
@@ -91,33 +97,50 @@ export function VCalendarComponent(props: VCalendarComponentProps) {
         </select>
       </div> */}
 
-      <div className="mb-6 w-full">
+      <div>
         <MultiSelect
-          //className="w-full py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"
+          //className="w-200 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"
           options={formattedTimeStops}
-          value={selected}
-          onChange={setSelected}
-          labelledBy="Select availabilities"
+          value={selectedIntervals}
+          onChange={setSelectedIntervals}
+          labelledBy="Selected"
         />
-        <h1>Selected availabilities</h1>
-        <pre>{JSON.stringify(selected)}</pre>
+        <h1>Selected intervals</h1>
+        <pre>{JSON.stringify(selectedIntervals)}</pre>
       </div>
-      <button
-        onClick={() => navigator.clipboard.writeText(selectedAvailabilities)}
-      >
-        Copy
-      </button>
 
       <DatePicker
+        className="w-200 px-2 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"
         format="MM/DD/YYYY"
-        value={value}
+        value={selectedDates}
         multiple
         plugins={[<DatePanel />]}
-        // onChange={setValue}
-        onChange={(dateObject) => {
-          console.log('dateObject', JSON.stringify(dateObject));
-        }}
+        onChange={(dateObject) => dateObject && setSelectedDates(dateObject)}
+        // onChange={(dateObject) => {
+        //   console.log('dateObject', JSON.stringify(dateObject));
+        // }}
       />
+      <div className="mb-6 mt-6">
+        <textarea
+          name="availibilities"
+          id="availibilities"
+          rows={7}
+          placeholder="Start selecting availibilities you would like to share on the calendar"
+          className="w-200 px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"
+          required
+          //onChange={setAvailibilities}
+          //value={form?.availabilities}
+          value={textToCopy}
+        ></textarea>
+      </div>
+      <button
+        className="w-full px-3 py-4 text-white bg-blue-500 rounded-md focus:bg-indigo-600 focus:outline-none"
+        onClick={() =>
+          navigator.clipboard.writeText(textToCopy)
+        }
+      >
+        Copy to Clipboard
+      </button>
     </div>
   );
 }
