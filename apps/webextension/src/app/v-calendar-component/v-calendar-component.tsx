@@ -18,7 +18,7 @@ export interface VCalendarComponentProps {
 
 export function VCalendarComponent(props: VCalendarComponentProps) {
   //duration will come from form component TBD
-  const duration = 30;
+  const duration = 15;
   // const [availabilitiesValues, setAvailabilities] = useState(new Set());
   const [selected, setSelected] = useState([]);
   const selectedAvailabilities = JSON.stringify(selected);
