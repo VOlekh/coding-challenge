@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
 
-import VSidebarComponent from './v-sidebar-component';
+import VFormComponent from './v-sidebar-component';
 
-describe('VSidebarComponent', () => {
+describe('VFormComponent', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<VSidebarComponent />);
+    const { baseElement } = render(<VFormComponent />);
     expect(baseElement).toBeTruthy();
   });
 });
