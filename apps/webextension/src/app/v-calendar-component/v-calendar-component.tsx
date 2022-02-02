@@ -6,56 +6,67 @@ import DatePicker, { DateObject } from 'react-multi-date-picker';
 import DatePanel from 'react-multi-date-picker/plugins/date_panel';
 
 /* eslint-disable-next-line */
-export interface VCalendarComponentProps {
-  availabilities?: Array<string>;
-}
-
-
+export interface VCalendarComponentProps {}
 
 export function VCalendarComponent(props: VCalendarComponentProps) {
-  //duration will come from form component TBD
+  //duration will come from FormComponent TBD using Redux
   const duration = 15;
   const [selectedIntervals, setSelectedIntervals] = useState([]);
-  const selectedAvailableIntervals = JSON.stringify(selectedIntervals);
-  console.log('selectedAvailableIntervals', selectedAvailableIntervals);
-
-  
-  //console.log('selecteIntervals', selectedIntervals.map(i=>i.value));
 
   const [selectedDates, setSelectedDates] = useState<
     DateObject | DateObject[]
   >();
-  const selectedAvailableDates = JSON.stringify(selectedDates);
 
+  function parseDates(selectedDates: DateObject | DateObject[] | undefined) {
+    const result = Array<string>();
 
-  // const selectedAvailableDates = "1645036878403,1645209678403,1645641678403";
-  function test(selectedAvailableDates?:any){
-  
-  const result ="";
-  if (
-    selectedAvailableDates !== null &&
-    selectedAvailableDates !== undefined &&
-    selectedAvailableDates.toString().trim().length !== 0
-  ) 
-  {
-    const result = selectedAvailableDates.split(",").map((date:any) => new Date(parseInt(date)).toLocaleDateString("UTC"))
-    
-  console.log(result)
-  
-  } else {
-  
-   console.log("Error")
+    if (selectedDates === undefined) {
+      return result;
+    }
+
+    if (Array.isArray(selectedDates)) {
+      result.push(
+        ...selectedDates.map((dateObject) => dateObject.format('YYYY/MM/DD'))
+      );
+    } else {
+      result.push(selectedDates.format('YYYY/MM/DD'));
+    }
+
+    return result;
   }
-  return result
+
+  function parseIntervals(selectedIntervals: any) {
+    return selectedIntervals.map((i: any) => i.value);
   }
-  
-  test(selectedAvailableDates)
 
+  function combineDatesAndIntevals(
+    dateStrings: Array<string>,
+    intervalStrings: Array<string>
+  ) {
+    // console.log('dates: ', dateStrings);
+    // console.log('intervals: ', intervalStrings);
+    const result = Array<string>();
+    if (dateStrings.length === 0 || intervalStrings.length === 0) {
+      result.push('Error: choose both dates and intervals');
+    }
+    dateStrings.forEach((dateString) => {
+      intervalStrings.forEach((intervalString) =>
+        result.push(dateString + ' ' + intervalString )
+      );
+    });
 
+    return result;
+  }
 
+  //console.log('Dates :', selectedDates);
+  const parsedDates = parseDates(selectedDates);
+  const parsedIntervals = parseIntervals(selectedIntervals);
+  const datesAndIntervals = combineDatesAndIntevals(
+    parsedDates,
+    parsedIntervals
+  );
 
-  const textToCopy = `Following dates ${ test(selectedAvailableDates)} and time slots ${selectedAvailableIntervals}`;
-
+  const textToCopy = `Following time slots were selected ${datesAndIntervals}`;
 
   // generate array of objects for drop-down values based on duration
   function getTimeStops(start: any, end: any) {
@@ -78,8 +89,6 @@ export function VCalendarComponent(props: VCalendarComponentProps) {
   }
 
   const timeStops = getTimeStops('08:00', '20:00');
-  console.log('timeStops ', timeStops);
-  // format array
   const formattedTimeStops = timeStops.map((val, i) => {
     return {
       label: `${val} - ${timeStops[i + 1]}`,
@@ -87,42 +96,39 @@ export function VCalendarComponent(props: VCalendarComponentProps) {
     };
   });
   formattedTimeStops.pop();
-  console.log('newTimeStops ', formattedTimeStops);
 
   return (
     <div>
-      <h1>Welcome to VCalendarComponent!</h1>
+      <h1>VCalendarComponent</h1>
+      <div className="mb-6 mt-6">
+        <DatePicker
+          className="w-200 px-2 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"
+          format="MM/DD/YYYY"
+          value={selectedDates}
+          multiple
+          plugins={[<DatePanel />]}
+          onChange={(dateObject) => dateObject && setSelectedDates(dateObject)}  
+          placeholder ="Select dates..."
+        />
+      </div>
 
-      <div>
+      <div className="mb-6 mt-6 ">
         <MultiSelect
           //className="w-200 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"
           options={formattedTimeStops}
           value={selectedIntervals}
           onChange={setSelectedIntervals}
           labelledBy="Selected"
+          //placeholderText ="Select intervals..."
         />
-        <h1>Selected intervals</h1>
-        <pre>{JSON.stringify(selectedIntervals)}</pre>
       </div>
-
-      <DatePicker
-        className="w-200 px-2 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"
-        format="MM/DD/YYYY"
-        value={selectedDates}
-        multiple
-        plugins={[<DatePanel />]}
-        onChange={(dateObject) => dateObject && setSelectedDates(dateObject)}
-        // onChange={(dateObject) => {
-        //   console.log('dateObject', JSON.stringify(dateObject));
-        // }}
-      />
       <div className="mb-6 mt-6">
         <textarea
           name="availibilities"
           id="availibilities"
           rows={7}
           placeholder="Start selecting availibilities you would like to share on the calendar"
-          className="w-200 px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"
+          className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"
           required
           value={textToCopy}
         ></textarea>
