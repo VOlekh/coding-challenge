@@ -16,25 +16,14 @@ export function VSidebarComponent(props: VSidebarComponentProps) {
   };
   return (
     <div>
-      {/* <!-- component -->
-      <div className="flex flex-wrap bg-gray-100 w-full h-screen">
-        <div className="w-10/12 bg-white  p-0 shadow-lg">
-          <VFormComponent />
-        </div>
-        <div className="w-9/12">
-          <div className="p-4 text-gray-500">Content here...</div>
-        </div>
-      </div> */}
-
-      {/* <!-- component --> */}
-      <div>
+      <div className="w-full bg-gray-50 pt-6 pl-3 shadow-lg">
         {sidebarIsOpen ? (
           <div>
             {/* close button */}
-            <div className="flex ">
+            <div>
               <button
                 type="button"
-                className="bg-white rounded-md border-2 rounded border-gray-500 p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 "
+                className="bg-white flex rounded-md border-2 rounded border-gray-500 p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 "
                 onClick={handleClose}
               >
                 <span className="sr-only">Close</span>
@@ -55,9 +44,8 @@ export function VSidebarComponent(props: VSidebarComponentProps) {
                   />
                 </svg>
               </button>
-              <div className="w-10/12 bg-white  p-0 shadow-lg">
-                <VFormComponent />
-              </div>
+
+              <VFormComponent />
             </div>
           </div>
         ) : (

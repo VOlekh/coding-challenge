@@ -98,7 +98,7 @@ export function VCalendarComponent(props: VCalendarComponentProps) {
   formattedTimeStops.pop();
 
   return (
-    <div>
+    <div  className="flex-wrap justify-center">
       <h1>VCalendarComponent</h1>
       <div className="mb-6 mt-6">
         <DatePicker

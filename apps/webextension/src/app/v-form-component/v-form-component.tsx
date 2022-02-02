@@ -73,33 +73,6 @@ export function VFormComponent(props: VFormComponentProps) {
       <div className="flex items-top min-h-screen bg-gray-50 dark:bg-gray-900">
         <div className="container mx-auto">
           <div className="max-w-md mx-auto bg-gray-50 p-5 ">
-            {/* close button */}
-            <div className="flex justify-end">
-              <button
-                type="button"
-                className="bg-white rounded-md border-2 rounded border-gray-500 p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 "
-                onClick={handleClose}
-              >
-                <span className="sr-only">Close</span>
-                {/* <!-- Heroicon name: outline/x --> */}
-                <svg
-                  className="h-3 w-3"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              </button>
-            </div>
-
             <div className="m-7">
               <form id="form">
                 <div className="mb-6">
@@ -117,12 +90,7 @@ export function VFormComponent(props: VFormComponentProps) {
                     {duration.map((i) => {
                       return <option value={i.key}>{i.value}</option>;
                     })}
-
-                    {/* <option value="30min">30 min</option>
-                    <option value="45min">45 min</option>
-                    <option value="60min">60 min</option> */}
                   </select>
-                  {/* <p>Selected {durationValue} </p> */}
                 </div>
 
                 <div className="mb-6">
@@ -151,7 +119,6 @@ export function VFormComponent(props: VFormComponentProps) {
                               x="0px"
                               y="0px"
                               viewBox="0 0 255 255"
-                              // xml:space="preserve"
                             >
                               <polygon
                                 className="fill-current"
@@ -173,12 +140,7 @@ export function VFormComponent(props: VFormComponentProps) {
                     {eventType.map((i) => {
                       return <option value={i.key}>{i.value}</option>;
                     })}
-
-                    {/* <option value="share">Share slots</option>
-                    <option value="discard">Discard slots</option>
-                    <option value="duplicate">Duplicate slots</option> */}
                   </select>
-                  {/* <p>Selected {eventTypeValue}</p> */}
                 </div>
 
                 <div className="mb-6">
