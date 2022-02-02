@@ -24,3 +24,7 @@ label span {
 input:checked + svg {
   display: block;
 }
+.date-picker-wrapper {
+  display: flex !important;
+  flex-direction: column !important;
+}

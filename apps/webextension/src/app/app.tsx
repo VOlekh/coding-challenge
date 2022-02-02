@@ -12,7 +12,7 @@ export function App() {
         <VSidebarComponent />
       </div>
 
-      <VCalendarComponent />
+      {/* <VCalendarComponent /> */}
     </div>
   );
 }

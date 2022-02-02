@@ -10,6 +10,7 @@
   "private": true,
   "dependencies": {
     "@headlessui/react": "^1.4.3",
+    "@types/styled-components": "^5.1.21",
     "autoprefixer": "^10.4.2",
     "core-js": "^3.6.5",
     "moment": "^2.29.1",

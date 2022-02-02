@@ -144,3 +144,4 @@ export function VCalendarComponent(props: VCalendarComponentProps) {
 }
 
 export default VCalendarComponent;
+
