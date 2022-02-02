@@ -23,15 +23,10 @@ const eventType = [
 ];
 
 export function VFormComponent(props: VFormComponentProps) {
-  const [sidebarIsOpen, setSidebarIsOpen] = useState<boolean>(true);
   const [durationValue, setDurationValue] = useState('');
   const [eventTypeValue, setEventTypeValue] = useState('');
   const [checked, setChecked] = useState(false);
-
-  const handleClose = (e: any) => {
-    console.log('close', e.target.value);
-    setSidebarIsOpen(false);
-  };
+  const [form, setForm] = useState<VFormComponentProps>();
 
   const handleSelectDuration = (e: any) => {
     console.log(e.target.value);
@@ -47,8 +42,6 @@ export function VFormComponent(props: VFormComponentProps) {
     setChecked(!checked);
   };
   console.log('checked', checked);
-
-  const [form, setForm] = useState<VFormComponentProps>();
 
   const setPlaceholderName = (e: any) => {
     setForm({
@@ -68,8 +61,6 @@ export function VFormComponent(props: VFormComponentProps) {
 
   return (
     <div>
-      {/* <h1>Welcome to VSidebarComponent!</h1> */}
-
       <div className="flex items-top min-h-screen bg-gray-50 dark:bg-gray-900">
         <div className="container mx-auto">
           <div className="max-w-md mx-auto bg-gray-50 p-5 ">
@@ -86,7 +77,7 @@ export function VFormComponent(props: VFormComponentProps) {
                     id="duration"
                     onChange={handleSelectDuration}
                   >
-                    {/* drop-down options */}
+                    {/*duration drop-down options */}
                     {duration.map((i) => {
                       return <option value={i.key}>{i.value}</option>;
                     })}
@@ -99,33 +90,31 @@ export function VFormComponent(props: VFormComponentProps) {
                       Event types
                     </label>
 
-                    {/* Show tooltip on top-right */}
-                    <div className=" ">
-                      <div className="relative ">
-                        <div className="group cursor-pointer relative inline-block  text-center">
-                          <button
-                            data-tooltip-target="tooltip-right"
-                            data-tooltip-placement="right"
-                            type="button"
-                            className="mb-2 ml-2 md:mb-0 text-white bg-blue-500 hover:bg-blue-800 focus:ring-5 focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-0,5 text-center"
-                          >
-                            i
-                          </button>
+                    {/* tooltip on top-right */}
+                    <div className="relative ">
+                      <div className="group cursor-pointer relative inline-block  text-center">
+                        <button
+                          data-tooltip-target="tooltip-right"
+                          data-tooltip-placement="right"
+                          type="button"
+                          className="mb-2 ml-2 md:mb-0 text-white bg-blue-500 hover:bg-blue-800 focus:ring-5 focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-0,5 text-center"
+                        >
+                          i
+                        </button>
 
-                          <div className="opacity-0 w-28 bg-black text-white text-center text-xs rounded-lg py-2 absolute z-10 group-hover:opacity-100 bottom-full -left-1/2 ml--24 px-3 pointer-events-none">
-                            Event types information
-                            <svg
-                              className="absolute text-black h-2 w-full -left-4 top-full"
-                              x="0px"
-                              y="0px"
-                              viewBox="0 0 255 255"
-                            >
-                              <polygon
-                                className="fill-current"
-                                points="0,0 127.5,127.5 255,0"
-                              />
-                            </svg>
-                          </div>
+                        <div className="opacity-0 w-28 bg-black text-white text-center text-xs rounded-lg py-2 absolute z-10 group-hover:opacity-100 bottom-full -left-1/2 ml--24 px-3 pointer-events-none">
+                          Event types information
+                          <svg
+                            className="absolute text-black h-2 w-full -left-4 top-full"
+                            x="0px"
+                            y="0px"
+                            viewBox="0 0 255 255"
+                          >
+                            <polygon
+                              className="fill-current"
+                              points="0,0 127.5,127.5 255,0"
+                            />
+                          </svg>
                         </div>
                       </div>
                     </div>
@@ -136,7 +125,7 @@ export function VFormComponent(props: VFormComponentProps) {
                     id="eventType"
                     onChange={handleSelectEventTypeValue}
                   >
-                    {/* drop-down options */}
+                    {/* slots drop-down options */}
                     {eventType.map((i) => {
                       return <option value={i.key}>{i.value}</option>;
                     })}
@@ -153,9 +142,6 @@ export function VFormComponent(props: VFormComponentProps) {
 
                     {/* checkbox */}
                     <label className="flex justify-end">
-                      {/* <label className="text-sm text-gray-600 dark:text-gray-400">
-                      Save placeholders
-                    </label> */}
                       <div className="bg-white ml-5 mb-2 border-2 rounded border-gray-500 w-6 h-6 flex flex-shrink-0 justify-center items-center mr-2 focus-within:border-blue-500 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-4 focus:ring-blue-300">
                         <input
                           type="checkbox"
@@ -171,12 +157,12 @@ export function VFormComponent(props: VFormComponentProps) {
                       </div>
                     </label>
                   </div>
-
+                  {/* placeholder input*/}
                   <input
                     type="text"
                     name="placeholderName"
                     id="placeholderName"
-                    placeholder="Type placeholder name here"
+                    placeholder="Placeholder name"
                     required
                     className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"
                     onChange={setPlaceholderName}
